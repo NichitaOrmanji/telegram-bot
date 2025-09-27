@@ -1,0 +1,10 @@
+.env
+.vs/
+*.pyc
+__pycache__/
+tasks.json
+reminders.json
+birthdays.json
+events.json
+tasks_history.json
+.vscode/
