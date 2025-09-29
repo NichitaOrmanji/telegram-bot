@@ -4,6 +4,7 @@ import json
 from dotenv import load_dotenv
 import random
 from telegram import InputFile
+from telegram.ext import Application
 from telegram.error import BadRequest
 from telegram import Update
 from telegram import (
