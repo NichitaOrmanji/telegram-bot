@@ -777,7 +777,7 @@ def main():
     events = load_data(EVENTS_FILE)
     tasks_history = load_data(TASKS_HISTORY_FILE)
 
-    app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+    app = Application.builder().token(TELEGRAM_TOKEN).build()
 
     # Команда /start
     app.add_handler(CommandHandler("start", start))
@@ -900,7 +900,15 @@ def main():
     schedule_daily_reset(app)
 
     print("Бот запущен...")
-    app.run_polling()
+    PORT = int(os.environ.get("PORT", 8443))  # Render задаёт PORT
+    RENDER_URL = "https://telegram-bot-zk6v.onrender.com"  # 👉 замени на свой Render URL
+
+    app.run_webhook(
+        listen="0.0.0.0",
+        port=PORT,
+        url_path=TELEGRAM_TOKEN,
+        webhook_url=f"{RENDER_URL}/{TELEGRAM_TOKEN}"
+    )
 
 
 if __name__ == "__main__":
